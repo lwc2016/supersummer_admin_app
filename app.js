@@ -3,10 +3,25 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cookParser = require("cookie-parser");
 const logger = require("morgan");
-
+const webpack = require("webpack");
+const webpackDevMiddleware = require("webpack-dev-middleware");
+const webpackHotMiddleware = require("webpack-hot-middleware");
+const webpackConfig = require("./webpack.config.js");
+const compiler = webpack(webpackConfig);
 
 /*---------实例化express----------*/
 const app = express();
+
+/*----------wepback自动打包、刷新浏览器--------------*/
+app.use(webpackDevMiddleware(compiler, {
+	publicPath: webpackConfig.output.publicPath,
+	noInfo: true,
+	stats: {
+		colors: true
+	}
+}));
+app.use(webpackHotMiddleware(compiler));
+
 
 /*---------打印请求日志-------------*/
 app.use(logger("dev"));
