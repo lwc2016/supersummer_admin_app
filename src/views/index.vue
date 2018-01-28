@@ -1,48 +1,92 @@
 <template>
-	<div class="container">
-		<h4 class="title">星韵管理系统登录</h4>
-		<el-form class="form">
-			<el-form-item size="small">
-				<el-input type="size" placeholder="用户名"></el-input>
-			</el-form-item>
-			<el-form-item size="small">
-				<el-input type="password" placeholder="密码"></el-input>
-			</el-form-item>
-			<el-form-item>
-				<el-button class="submit" type="primary">登录</el-button>
-			</el-form-item>
-		</el-form>
-	</div>
-
+    <div class="container">
+        <div class="form-area">
+            <h4 class="title">星韵管理系统登录</h4>
+            <el-form class="form" v-bind:model="form" v-bind:rules="rules" status-icon ref="loginForm">
+                <el-form-item size="small" prop="username">
+                    <el-input type="size" placeholder="用户名" v-model="form.username"></el-input>
+                </el-form-item>
+                <el-form-item size="small" prop="password">
+                    <el-input type="password" placeholder="密码" v-model="form.password"></el-input>
+                </el-form-item>
+                <el-form-item class="btn">
+                    <el-button class="submit" type="primary" v-on:click="handleSubmitForm('loginForm')">登录</el-button>
+                </el-form-item>
+                <div class="error">
+                    <p v-if="errorMsg"><i class="el-icon-error"></i><span>{{errorMsg}}</span></p>
+                </div>
+            </el-form>
+        </div>
+    </div>
 </template>
-
 <script>
-	export default {
-		data(){
-			return {}
-		}
-	}
+export default {
+    data() {
+        return {
+        	form:{
+        		username: "",
+        		password: ""
+        	},
+        	rules:{
+				username:[{
+					required: true, message: "请输入用户名"
+				}],
+				password:[{
+					required: true, message: "请输入密码"
+				}]
+        	},
+            errorMsg: ""
+        }
+    },
+    methods: {
+    	handleSubmitForm(formName){
+			console.log("------formName-----");
+			console.log(formName);
+			this.$refs[formName].validate((valid)=>{
+				console.log(valid);
+                console.log(this.form);
+			});
+    	}
+    }
+}
 </script>
+<style lang="less" scoped>
+.container{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.form-area {
+    width: 340px;
+    background-color: #F2F6FC;
+    border-radius: 6px;
+}
 
-<style lang="less">
-	.container{
-		margin: 0 auto;
-		margin-top: 100px;
-		width: 340px;
-		background-color: #F2F6FC;
-		border-radius: 6px;
-	}
-	.title{
-		line-height: 50px;
-		padding-left: 20px;
-		color: #606266;
-	}
-	.form{
-		padding-left: 20px;
-		padding-right: 20px;
-		padding-bottom: 5px;
-	}
-	.submit{
-		width: 100%;
-	}
+.title {
+    line-height: 50px;
+    padding-left: 20px;
+    color: #606266;
+}
+
+.form {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.btn{
+    margin-bottom: 0px;
+}
+.submit {
+    width: 100%;
+}
+.error{
+    height: 40px;
+    line-height: 40px;
+    color: #F56C6C;
+    font-size: 12px;
+}
+.error span{
+    margin-left: 6px;
+}
 </style>
