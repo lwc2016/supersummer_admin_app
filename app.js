@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cookParser = require("cookie-parser");
 const logger = require("morgan");
 const webpack = require("webpack");
+const indexRoute = require("./app/routes/server.index.route.js");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const webpackConfig = require("./webpack.config.js");
@@ -37,6 +38,9 @@ app.use(bodyParser.json());
 
 /*---------解析application/x-www-form-urlencoded格式数据---------*/
 app.use(bodyParser.urlencoded({extended: false}));
+
+/*---------添加路由------------*/
+app.use("/", indexRoute);
 
 /*---------捕获404错误------------------*/
 app.use((req,res,next)=>{
