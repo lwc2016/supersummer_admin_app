@@ -1,9 +1,15 @@
+import VueRouter from "vue-router";
 import Index from "../views/index.vue";
 import Backoffice from "../views/backoffice.vue";
-import VueRouter from "vue-router";
+import CategoryList from "../views/category_list.vue";
+
 const routes = [
     { path: "/", component: Index },
-    { path: "/backoffice", component: Backoffice }
+    { path: "/backoffice", component: Backoffice,
+      children:[
+      	{path: "/backoffice/category/:subject", component: CategoryList, props: true}
+      ]
+    }
 ];
 
 const router = new VueRouter({

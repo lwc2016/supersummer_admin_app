@@ -5,7 +5,7 @@ const router = express.Router();
 const request = require("request");
 const authMiddleware = require("../middlewares/auth.middleware.js");
 
-const paths = ["/", "/backoffice"];
+const paths = ["/", "/backoffice", "/backoffice/category/:subject"];
 router.get(paths, (req,res,next)=>{
 	res.sendFile(path.join(__dirname, "../views/index.html"));
 });
@@ -25,8 +25,8 @@ router.post("/do", authMiddleware, (req,res,next)=>{
 			let data = JSON.parse(body);
 			if(api == "/user/login" && data.code == 0){
 				console.log("------body-----");
-				res.cookie("token", data.result.token, {expires: new Date(Date.now() + 10 * 60 * 1000), httpOnly: true});
-				res.cookie("uid", data.result.uid, {expires: new Date(Date.now() + 10 * 60 * 1000), httpOnly: true});
+				res.cookie("token", data.result.token, {expires: new Date(Date.now() + config.cookie_expiredTime), httpOnly: true});
+				res.cookie("uid", data.result.uid, {expires: new Date(Date.now() + config.cookie_expiredTime), httpOnly: true});
 			};
 			res.json(data);
 		} catch(e) {

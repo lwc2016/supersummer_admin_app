@@ -6,19 +6,23 @@
 			text-color="#ffffff"
 			active-text-color="#ffd04b"
 			class="aside-nav"
+			v-bind:router="true"
 			>
-				<el-menu-item index="1">
+				<el-menu-item index="1" route="/backoffice">
 					<i class="el-icon-menu"></i>
 					<span slot="title">首页</span>
 				</el-menu-item>
 				<el-submenu index="2">
 					<template slot="title">
 						<i class="el-icon-location"></i>
-						<span>导航一</span>
+						<span>分类管理</span>
 					</template>
-					<el-menu-item index="2-1">选项1</el-menu-item>
-					<el-menu-item index="2-2">选项2</el-menu-item>
-					<el-menu-item index="2-3">选项3</el-menu-item>
+					<el-menu-item index="2-1" route="/backoffice/category/kuaiji">会计分类</el-menu-item>
+					<el-menu-item index="2-2" route="/backoffice/category/shuifa">税法分类</el-menu-item>
+					<el-menu-item index="2-3" route="/backoffice/category/caiwu">财务管理分类</el-menu-item>
+					<el-menu-item index="2-4" route="/backoffice/category/jingji">经济法分类</el-menu-item>
+					<el-menu-item index="2-5" route="/backoffice/category/shenji">审计分类</el-menu-item>
+					<el-menu-item index="2-6" route="/backoffice/category/fengkong">风险控制分类</el-menu-item>
 				</el-submenu>
 				<el-submenu index="3">
 					<template slot="title">
@@ -52,7 +56,7 @@
 				</el-dropdown>
 			</el-header>
 			<el-main>
-				
+				<router-view class="main-content"></router-view>
 			</el-main>
 		</el-container>
 	</el-container>
@@ -62,14 +66,20 @@
 	export default {
 		data(){
 			return {}
+		},
+		methods:{
+			handleSelected(path){
+				console.log(path);
+			}
 		}
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .container{
 	width: 100%;
 	height: 100%;
+	background-color: #f5f5f5;
 }
 .aside{
 	height: 100%;
@@ -83,5 +93,8 @@
 	height: 50px!important;
 	text-align: right;
 	line-height: 50px;
+}
+.main-content{
+	background-color: #ffffff;
 }
 </style>
