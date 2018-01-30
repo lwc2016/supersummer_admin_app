@@ -51,6 +51,7 @@ app.use((req,res,next)=>{
 
 /*---------捕获500错误----------------*/
 app.use((err, req, res, next)=>{
+	console.log(err);
 	res.status(err.status || 500).send(err.status == "404" ? err.message : "Error: 500, server error");
 	next();
 });

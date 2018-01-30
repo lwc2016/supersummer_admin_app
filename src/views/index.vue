@@ -20,35 +20,39 @@
     </div>
 </template>
 <script>
-export default {
-    data() {
-        return {
-        	form:{
-        		username: "",
-        		password: ""
-        	},
-        	rules:{
-				username:[{
-					required: true, message: "请输入用户名"
-				}],
-				password:[{
-					required: true, message: "请输入密码"
-				}]
-        	},
-            errorMsg: ""
+    import { user_login } from "../modules/api.js";
+    import router from "../modules/router.js";
+    export default {
+        data() {
+            return {
+            	form:{
+            		username: "",
+            		password: ""
+            	},
+            	rules:{
+    				username:[{
+    					required: true, message: "请输入用户名"
+    				}],
+    				password:[{
+    					required: true, message: "请输入密码"
+    				}]
+            	},
+                errorMsg: ""
+            }
+        },
+        methods: {
+        	handleSubmitForm(formName){
+    			this.$refs[formName].validate((valid)=>{
+                    if(valid){
+                        user_login(this.form).then(data=>{
+                            if(data.code == 0) return router.push({path: "/backoffice"});
+                            this.errorMsg = data.errorMsg;
+                        });
+                    }
+    			});
+        	}
         }
-    },
-    methods: {
-    	handleSubmitForm(formName){
-			console.log("------formName-----");
-			console.log(formName);
-			this.$refs[formName].validate((valid)=>{
-				console.log(valid);
-                console.log(this.form);
-			});
-    	}
     }
-}
 </script>
 <style lang="less" scoped>
 .container{
