@@ -35,3 +35,18 @@ export const category_delete = (id="")=>{
 export const category_add = (data={})=>{
 	return axios.post("/category/add", data);
 };
+
+/*---------获取分类详情--------*/
+export const category_detail = (id="")=>{
+	return axios.post("/category/detail", {id})
+};
+
+/*---------编辑分类----------*/
+export const category_edit = (data={})=>{
+	return axios.post("/category/edit", data);
+};
+
+/*----------获取考试列表---------*/
+export const exam_list = (data={})=>{
+	return axios.post("/exam/list", data);
+};

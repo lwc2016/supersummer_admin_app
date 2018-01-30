@@ -12,6 +12,7 @@
 			v-bind:data="list" 
 			v-loading="loading"
 			element-loading-text="拼命加载中..." 
+			class="table"
 			border
 		>
 			<el-table-column
@@ -24,6 +25,10 @@
 				<template slot-scope="scope">{{formatSubject(scope.row.subject)}}</template>
 			</el-table-column>
 			<el-table-column
+			label="题目数量"
+			>
+			</el-table-column>
+			<el-table-column
 			label="创建时间"
 			>
 				<template slot-scope="scope">{{formatDateTime(scope.row.created_time, "YYYY-MM-DD h:m:s")}}</template>
@@ -32,7 +37,9 @@
 			label="操作"
 			>
 				<template slot-scope="scope">
-					<el-button size="mini" type="primary">编辑</el-button>
+					<router-link v-bind:to="'/backoffice/category/edit/' + scope.row.id">
+						<el-button size="mini" type="primary">编辑</el-button>
+					</router-link>
 					<el-button size="mini" type="danger" v-on:click="handleDelete(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -95,7 +102,7 @@
 				});
 			},
 			handlePageChange(pageNo){
-				this.form.pageNo = pageNo;
+				this.search.pageNo = pageNo;
 				this.loading = true;
 				this.getList();
 			}
@@ -119,6 +126,9 @@
 
 <style lang="less" scoped>
 .page{
+	margin-top: 5px;
+}
+.table{
 	margin-top: 5px;
 }
 .form-item{

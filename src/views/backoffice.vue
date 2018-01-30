@@ -24,6 +24,10 @@
 					<el-menu-item index="2-5" route="/backoffice/category/shenji">审计分类</el-menu-item>
 					<el-menu-item index="2-6" route="/backoffice/category/fengkong">风险控制分类</el-menu-item>
 				</el-submenu>
+				<el-menu-item index="3" route="/backoffice/exam/list">
+					<i class="el-icon-menu"></i>
+					<span slot="title">模拟考试管理</span>
+				</el-menu-item>
 			</el-menu>
 		</el-aside>
 		<el-container>
@@ -78,7 +82,6 @@
 	line-height: 50px;
 }
 .content{
-	width: 100%;
 	height: 100%;
 	padding: 10px!important;
 	padding-bottom: 0!important;

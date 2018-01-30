@@ -24,7 +24,7 @@
 	</el-form>
 </template>
 <script>
-	import { category_add } from "../modules/api.js";
+	import { category_add, category_detail, category_edit } from "../modules/api.js";
 	import router from "../modules/router.js";
 	export default{
 		data(){
@@ -39,10 +39,17 @@
 				}
 			}
 		},
+		props: ["id"],
 		methods: {
 			handleSubmit(formName){
 				this.$refs[formName].validate(valid=>{
-					if(valid) this.addCategory();
+					if(valid){
+						if(this.id){
+							this.editCategory();
+						}else{
+							this.addCategory();
+						};
+					};
 				});
 			},
 			handleReset(){
@@ -60,7 +67,29 @@
 						this.$message({type: "error", message: data.errorMsg});
 					}
 				});
+			},
+			editCategory(){
+				let form = Object.assign(this.form, {id: this.id});
+				category_edit(form).then(data=>{
+					if(data.code == "0"){
+						this.$message({type: "success", message: "分类修改成功！"});
+						router.push({path: `/backoffice/category/${this.form.subject}`});
+					}else{
+						this.$message({type: "error", message: data.errorMsg});
+					};
+				});
+			},
+			getDetail(){
+				category_detail(this.id).then(data=>{
+					if(data.code == "0"){
+						this.form.name = data.result.name;
+						this.form.subject = data.result.subject;
+					}
+				});
 			}
+		},
+		mounted(){
+			this.id && this.getDetail();
 		}
 	}
 </script>

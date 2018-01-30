@@ -1,0 +1,48 @@
+<template>
+    <div>
+        <el-table size="mini" v-bind:data="list" v-loading="loading" element-loading-text="拼命加载中..." class="table" border>
+            <el-table-column prop="name" label="名称"></el-table-column>
+            <el-table-column prop="subject" label="所属科目"></el-table-column>
+            <el-table-column label="题目数量"></el-table-column>
+            <el-table-column label="考试人数"></el-table-column>
+            <el-table-column label="创建时间">
+                <template slot-scope="scope"></template>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <router-link v-bind:to="'/backoffice/category/edit/' + scope.row.id">
+                        <el-button size="mini" type="primary">编辑</el-button>
+                    </router-link>
+                    <el-button size="mini" type="danger" v-on:click="handleDelete(scope.row.id)">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+</template>
+<script>
+import { exam_list } from "../modules/api.js";
+export default {
+    data() {
+        return {
+            list: [],
+            total: 0,
+            loading: false
+        }
+    },
+    methods: {
+        getList() {
+            exam_list().then(data => {
+                if (data.code == "0") {
+                    this.list = data.result.list;
+                    this.total = data.result.page.total;
+                }
+            });
+        }
+    },
+    mounted() {
+        this.getList()
+    }
+}
+</script>
+<style scoped>
+</style>
