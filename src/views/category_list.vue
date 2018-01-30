@@ -9,21 +9,29 @@
 		label="分类名称"
 		></el-table-column>
 		<el-table-column
-		prop="subject"
 		label="所属科目"
-		></el-table-column>
+		>
+			<template slot-scope="scope">{{formatSubject(scope.row.subject)}}</template>
+		</el-table-column>
 		<el-table-column
-		prop="created_time"
 		label="创建时间"
-		></el-table-column>
+		>
+			<template slot-scope="scope">{{formatDateTime(scope.row.created_time, "YYYY-MM-DD h:m:s")}}</template>
+		</el-table-column>
 		<el-table-column
 		label="操作"
-		></el-table-column>
+		>
+			<template slot-scope="scope">
+				<el-button size="small" type="primary">编辑</el-button>
+				<el-button size="small" type="danger" v-on:click="handleDelete(scope.row.id)">删除</el-button>
+			</template>
+		</el-table-column>
 	</el-table>
 </template>
 
 <script>
-	import { category_list } from "../modules/api.js";
+	import { formatSubject, formatDateTime } from "../modules/filter.js";
+	import { category_list, category_delete } from "../modules/api.js";
 	export default{
 		data(){
 			return{
@@ -32,7 +40,9 @@
 					pageSize: 10,
 					subject: this.subject
 				},
-				list: []
+				list: [],
+				formatSubject: formatSubject,
+				formatDateTime: formatDateTime
 			}
 		},
 		props: ["subject"],
@@ -43,6 +53,24 @@
 					if(data.code == "0"){
 						this.list = data.result.list;
 					};
+				});
+			},
+			handleDelete(id){
+				this.$alert("此操作将永久删除该分类, 是否继续?","提示", {
+					confirmButtonText:"确定",
+					cancelButtonText: "取消",
+					type:"warning",
+					center: true
+				}).then(()=>{
+					this.deleteCategory(id);
+				}).catch(()=>{
+					this.$message({type: "info", message: "已取消删除！"});
+				});
+			},
+			deleteCategory(id){
+				category_delete(id).then(()=>{
+					this.getList();
+					this.$message({type: "success", message: "删除成功！"});
 				});
 			}
 		},

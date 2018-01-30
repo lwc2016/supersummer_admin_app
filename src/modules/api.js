@@ -25,3 +25,8 @@ export const user_login = (data={})=>{
 export const category_list = (data={})=>{
 	return axios.post("/category/list", data);
 };
+
+/*----------删除分类接口--------*/
+export const category_delete = (id="")=>{
+	return axios.post("/category/delete", {id});
+};
