@@ -15,7 +15,7 @@
 				<el-submenu index="2">
 					<template slot="title">
 						<i class="el-icon-location"></i>
-						<span>分类管理</span>
+						<span>试题分类管理</span>
 					</template>
 					<el-menu-item index="2-1" route="/backoffice/category/kuaiji">会计分类</el-menu-item>
 					<el-menu-item index="2-2" route="/backoffice/category/shuifa">税法分类</el-menu-item>
@@ -23,24 +23,6 @@
 					<el-menu-item index="2-4" route="/backoffice/category/jingji">经济法分类</el-menu-item>
 					<el-menu-item index="2-5" route="/backoffice/category/shenji">审计分类</el-menu-item>
 					<el-menu-item index="2-6" route="/backoffice/category/fengkong">风险控制分类</el-menu-item>
-				</el-submenu>
-				<el-submenu index="3">
-					<template slot="title">
-						<i class="el-icon-location"></i>
-						<span>导航二</span>
-					</template>
-					<el-menu-item index="3-1">选项1</el-menu-item>
-					<el-menu-item index="3-2">选项2</el-menu-item>
-					<el-menu-item index="3-3">选项3</el-menu-item>
-				</el-submenu>
-				<el-submenu index="3">
-					<template slot="title">
-						<i class="el-icon-location"></i>
-						<span>导航三</span>
-					</template>
-					<el-menu-item index="4-1">选项1</el-menu-item>
-					<el-menu-item index="4-2">选项2</el-menu-item>
-					<el-menu-item index="4-3">选项3</el-menu-item>
 				</el-submenu>
 			</el-menu>
 		</el-aside>
@@ -55,9 +37,10 @@
 					</el-dropdown-menu>
 				</el-dropdown>
 			</el-header>
-			<el-main>
+			<el-main class="content">
 				<router-view class="main-content"></router-view>
 			</el-main>
+			<el-footer class="footer">星韵管理系统 &copy;2018 </el-footer>
 		</el-container>
 	</el-container>
 </template>
@@ -89,12 +72,29 @@
 	height: 100%;
 }
 .header{
-	background-color: #EBEEF5;
+	background-color: #ffffff;
 	height: 50px!important;
 	text-align: right;
 	line-height: 50px;
 }
+.content{
+	width: 100%;
+	height: 100%;
+	padding: 10px!important;
+	padding-bottom: 0!important;
+	overflow: scroll;
+}
 .main-content{
 	background-color: #ffffff;
+	padding: 10px;
+}
+.footer{
+	width: 100%;
+	height: 40px!important;
+	background-color: #ffffff;
+	text-align: center;
+	line-height: 40px;
+	font-size: 12px;
+	color: #606266;
 }
 </style>

@@ -1,32 +1,49 @@
 <template>
-	<el-table size="small" v-bind:data="list">
-		<el-table-column
-		prop="id"
-		label="id"
-		></el-table-column>
-		<el-table-column
-		prop="name"
-		label="分类名称"
-		></el-table-column>
-		<el-table-column
-		label="所属科目"
+	<div>
+		<el-form v-bind:inline="true">
+			<el-form-item class="form-item">
+				<router-link to="/backoffice/category/add">
+					<el-button size="small" type="primary">新增分类</el-button>
+				</router-link>
+			</el-form-item>
+		</el-form>
+		<el-table 
+			size="mini" 
+			v-bind:data="list" 
+			v-loading="loading"
+			element-loading-text="拼命加载中..." 
+			border
 		>
-			<template slot-scope="scope">{{formatSubject(scope.row.subject)}}</template>
-		</el-table-column>
-		<el-table-column
-		label="创建时间"
-		>
-			<template slot-scope="scope">{{formatDateTime(scope.row.created_time, "YYYY-MM-DD h:m:s")}}</template>
-		</el-table-column>
-		<el-table-column
-		label="操作"
-		>
-			<template slot-scope="scope">
-				<el-button size="small" type="primary">编辑</el-button>
-				<el-button size="small" type="danger" v-on:click="handleDelete(scope.row.id)">删除</el-button>
-			</template>
-		</el-table-column>
-	</el-table>
+			<el-table-column
+			prop="name"
+			label="分类名称"
+			></el-table-column>
+			<el-table-column
+			label="所属科目"
+			>
+				<template slot-scope="scope">{{formatSubject(scope.row.subject)}}</template>
+			</el-table-column>
+			<el-table-column
+			label="创建时间"
+			>
+				<template slot-scope="scope">{{formatDateTime(scope.row.created_time, "YYYY-MM-DD h:m:s")}}</template>
+			</el-table-column>
+			<el-table-column
+			label="操作"
+			>
+				<template slot-scope="scope">
+					<el-button size="mini" type="primary">编辑</el-button>
+					<el-button size="mini" type="danger" v-on:click="handleDelete(scope.row.id)">删除</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
+		<el-pagination
+		class="page"
+		v-bind:page-size="search.pageSize"
+		v-bind:total="total"
+		v-on:current-change="handlePageChange"
+		></el-pagination>
+	</div>
 </template>
 
 <script>
@@ -41,8 +58,10 @@
 					subject: this.subject
 				},
 				list: [],
+				total: 0,
 				formatSubject: formatSubject,
-				formatDateTime: formatDateTime
+				formatDateTime: formatDateTime,
+				loading: true
 			}
 		},
 		props: ["subject"],
@@ -52,6 +71,8 @@
 				category_list(this.search).then(data=>{
 					if(data.code == "0"){
 						this.list = data.result.list;
+						this.total = data.result.page.total;
+						this.loading = false;
 					};
 				});
 			},
@@ -72,6 +93,11 @@
 					this.getList();
 					this.$message({type: "success", message: "删除成功！"});
 				});
+			},
+			handlePageChange(pageNo){
+				this.form.pageNo = pageNo;
+				this.loading = true;
+				this.getList();
 			}
 		},
 		mounted(){
@@ -91,6 +117,11 @@
 	}
 </script>
 
-<style>
-	
+<style lang="less" scoped>
+.page{
+	margin-top: 5px;
+}
+.form-item{
+	margin-bottom: 0!important;
+}
 </style>

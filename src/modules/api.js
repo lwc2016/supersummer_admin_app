@@ -30,3 +30,8 @@ export const category_list = (data={})=>{
 export const category_delete = (id="")=>{
 	return axios.post("/category/delete", {id});
 };
+
+/*---------添加分类----------*/
+export const category_add = (data={})=>{
+	return axios.post("/category/add", data);
+};
