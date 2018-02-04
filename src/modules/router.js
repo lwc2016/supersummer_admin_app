@@ -3,7 +3,9 @@ import Index from "../views/index.vue";
 import Backoffice from "../views/backoffice.vue";
 import CategoryList from "../views/category_list.vue";
 import CategorySave from "../views/category_save.vue";
-import ExamList from "../views/exam_list.vue";
+import PaperList from "../views/paper_list.vue";
+import PaperSave from "../views/paper_save.vue";
+import AnswerList from "../views/answer_list.vue";
 
 const routes = [
     { path: "/", component: Index },
@@ -12,7 +14,10 @@ const routes = [
       	{path: "/backoffice/category/add", component: CategorySave},
       	{path: "/backoffice/category/edit/:id", component: CategorySave, props: true},
       	{path: "/backoffice/category/:subject", component: CategoryList, props: true},
-        {path: "/backoffice/exam/list", component: ExamList}
+        {path: "/backoffice/paper/list", component: PaperList},
+        {path: "/backoffice/paper/add", component: PaperSave},
+        {path: "/backoffice/paper/edit/:id", component: PaperSave},
+        {path: "/backoffice/answer/list", component: AnswerList}
       ]
     }
 ];

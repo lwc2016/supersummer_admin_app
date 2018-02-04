@@ -25,6 +25,7 @@
 				<template slot-scope="scope">{{formatSubject(scope.row.subject)}}</template>
 			</el-table-column>
 			<el-table-column
+			prop="question_count"
 			label="题目数量"
 			>
 			</el-table-column>
@@ -84,7 +85,7 @@
 				});
 			},
 			handleDelete(id){
-				this.$alert("此操作将永久删除该分类, 是否继续?","提示", {
+				this.$confirm("此操作将永久删除该分类, 是否继续?","提示", {
 					confirmButtonText:"确定",
 					cancelButtonText: "取消",
 					type:"warning",
@@ -96,9 +97,13 @@
 				});
 			},
 			deleteCategory(id){
-				category_delete(id).then(()=>{
-					this.getList();
-					this.$message({type: "success", message: "删除成功！"});
+				category_delete(id).then((data)=>{
+					if(data.code == 0){
+						this.getList();
+						this.$message({type: "success", message: "删除成功！"});
+					}else{
+						this.$message({type: "error", message: data.errorMsg});
+					};
 				});
 			},
 			handlePageChange(pageNo){

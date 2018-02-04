@@ -15,7 +15,7 @@
 				<el-submenu index="2">
 					<template slot="title">
 						<i class="el-icon-location"></i>
-						<span>试题分类管理</span>
+						<span>题目分类管理</span>
 					</template>
 					<el-menu-item index="2-1" route="/backoffice/category/kuaiji">会计分类</el-menu-item>
 					<el-menu-item index="2-2" route="/backoffice/category/shuifa">税法分类</el-menu-item>
@@ -24,9 +24,13 @@
 					<el-menu-item index="2-5" route="/backoffice/category/shenji">审计分类</el-menu-item>
 					<el-menu-item index="2-6" route="/backoffice/category/fengkong">风险控制分类</el-menu-item>
 				</el-submenu>
-				<el-menu-item index="3" route="/backoffice/exam/list">
+				<el-menu-item index="3" route="/backoffice/paper/list">
 					<i class="el-icon-menu"></i>
-					<span slot="title">模拟考试管理</span>
+					<span slot="title">试卷管理</span>
+				</el-menu-item>
+				<el-menu-item index="4" route="/backoffice/answer/list">
+					<i class="el-icon-menu"></i>
+					 <span slot="title">答题管理</span>
 				</el-menu-item>
 			</el-menu>
 		</el-aside>

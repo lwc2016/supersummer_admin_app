@@ -46,7 +46,22 @@ export const category_edit = (data={})=>{
 	return axios.post("/category/edit", data);
 };
 
-/*----------获取考试列表---------*/
-export const exam_list = (data={})=>{
-	return axios.post("/exam/list", data);
+/*----------获取试卷列表---------*/
+export const paper_list = (data={})=>{
+	return axios.post("/paper/list", data);
 };
+/*---------删除试卷接口-------------*/
+export const paper_delete = (id="")=>{
+	return axios.post("/paper/delete", {id});
+};
+
+/*---------添加试卷接口-------------*/
+export const paper_add = (data={})=>{
+	return axios.post("/paper/add", data);
+};
+
+/*---------编辑试卷接口-----------*/
+export const paper_edit = (data={})=>{
+	return axios.post("/paper/edit", data);
+};
+
