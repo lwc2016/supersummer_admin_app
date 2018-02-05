@@ -15,21 +15,29 @@
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <el-button size="mini" type="primary">编辑</el-button>
-                    <el-button size="mini" type="danger">删除</el-button>
+                    <el-button v-on:click="handleDelete(scope.row.id)" size="mini" type="danger">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination
+        v-on:current-change="handlePageChange"
+        v-bind:page-size="10"
+        v-bind:total="total"
+        class="page"
+        >
+        </el-pagination>
     </div>
 </template>
 <script>
-import { question_list } from "../modules/api.js";
+import { question_list, question_delete } from "../modules/api.js";
 import { formatSubject, questionType, formatDateTime } from "../modules/filter.js";
 export default {
     data() {
         return {
             search: {
                 pageNo: 1,
-                pageSize: 10
+                pageSize: 10,
+                subject: this.subject
             },
             list: [],
             total: 0,
@@ -38,6 +46,7 @@ export default {
             formatDateTime: formatDateTime
         }
     },
+    props: ["subject"],
     methods: {
         getList() {
             question_list(this.search).then(data => {
@@ -46,6 +55,31 @@ export default {
                     this.total = data.result.page.total;
                 };
             });
+        },
+        handleDelete(id){
+            this.$confirm("此操作将永久删除此题目，是否继续？", "提示", {
+                "confirmButtonText": "确定",
+                "cancelButtonText": "取消",
+                "type": "warning"
+            }).then(()=>{
+                this.questionDelete(id);
+            }).catch(()=>{
+                this.$message({type:"info", message: "已取消删除"});
+            });
+        },
+        questionDelete(id){
+            question_delete(id).then(data=>{
+                if(data.code == "0"){
+                    this.$message({type: "success", message: "删除成功！"});
+                    this.getList();
+                }else{
+                    this.$message({type: "error", message: data.errorMsg});
+                };
+            });
+        },
+        handlePageChange(pageNo){
+            this.search.pageNo = pageNo;
+            this.getList();
         }
     },
     mounted() {
@@ -54,4 +88,7 @@ export default {
 }
 </script>
 <style>
+.page{
+    margin-top: 5px;
+}
 </style>

@@ -19,7 +19,7 @@ const routes = [
         {path: "/backoffice/paper/add", component: PaperSave},
         {path: "/backoffice/paper/edit/:id", component: PaperSave, props: true},
         {path: "/backoffice/answer/list", component: AnswerList},
-        {path: "/backoffice/question/:subject", component: QuestionList}
+        {path: "/backoffice/question/:subject", component: QuestionList, props: true}
       ]
     }
 ];
