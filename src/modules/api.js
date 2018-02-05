@@ -71,6 +71,10 @@ export const question_list = (data={})=>{
 	return axios.post('/question/list', data);
 };
 
+/*---------删除题目------------------*/
+export const question_delete = (id="")=>{
+	return axios.post("/question/delete", {id});
+};
 
 
 
