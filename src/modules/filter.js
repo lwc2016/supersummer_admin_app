@@ -45,3 +45,16 @@ export const formatDateTime = (timestamp, template) => {
         .replace("m", minutes)
         .replace("s", seconds);
 };
+
+
+/*--------格式化题目类型-------------*/
+export const questionType = (type)=>{
+    switch(type){
+        case "single":
+            return "单选题";
+        case "double":
+            return "多选题";
+        default:
+            return type;
+    }
+};

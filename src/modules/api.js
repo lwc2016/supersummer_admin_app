@@ -66,3 +66,14 @@ export const paper_detail = (data={})=>{
 	return axios.post("/paper/detail", data);
 };
 
+/*---------获取题目列表--------------*/
+export const question_list = (data={})=>{
+	return axios.post('/question/list', data);
+};
+
+
+
+
+
+
+
