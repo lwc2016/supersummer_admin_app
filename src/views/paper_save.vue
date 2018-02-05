@@ -24,7 +24,7 @@
 	</el-form>
 </template>
 <script>
-	import { paper_add } from "../modules/api.js";
+	import { paper_add, paper_detail } from "../modules/api.js";
 	import router from "../modules/router.js";
 	export default{
 		data(){
@@ -64,6 +64,11 @@
 						router.push({path: "/backoffice/paper/list"});
 					}
 				});
+			},
+			getDetail(){
+				// paper_detail(this.id).then(data=>{
+				// 	console.log(data);
+				// });
 			}
 		},
 		mounted(){

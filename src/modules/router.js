@@ -16,7 +16,7 @@ const routes = [
       	{path: "/backoffice/category/:subject", component: CategoryList, props: true},
         {path: "/backoffice/paper/list", component: PaperList},
         {path: "/backoffice/paper/add", component: PaperSave},
-        {path: "/backoffice/paper/edit/:id", component: PaperSave},
+        {path: "/backoffice/paper/edit/:id", component: PaperSave, props: true},
         {path: "/backoffice/answer/list", component: AnswerList}
       ]
     }

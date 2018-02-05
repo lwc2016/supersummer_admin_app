@@ -20,7 +20,6 @@ axios.interceptors.response.use(function(response){
 export const user_login = (data={})=>{
 	return axios.post("/user/login", data);
 };
-
 /*----------获取分类-----------*/
 export const category_list = (data={})=>{
 	return axios.post("/category/list", data);
@@ -54,14 +53,16 @@ export const paper_list = (data={})=>{
 export const paper_delete = (id="")=>{
 	return axios.post("/paper/delete", {id});
 };
-
 /*---------添加试卷接口-------------*/
 export const paper_add = (data={})=>{
 	return axios.post("/paper/add", data);
 };
-
 /*---------编辑试卷接口-----------*/
 export const paper_edit = (data={})=>{
 	return axios.post("/paper/edit", data);
+};
+/*---------获取试卷详情----------------*/
+export const paper_detail = (data={})=>{
+	return axios.post("/paper/detail", data);
 };
 

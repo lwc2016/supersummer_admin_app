@@ -19,13 +19,19 @@
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <router-link v-bind:to="'/backoffice/category/edit/' + scope.row.id">
+                    <router-link v-bind:to="'/backoffice/paper/edit/' + scope.row.id">
                         <el-button size="mini" type="primary">编辑</el-button>
                     </router-link>
                     <el-button size="mini" type="danger" v-on:click="handleDelete(scope.row.id)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination
+          class="page"
+          v-on:current-change="handlePageChange"
+          :page-size="10"
+          :total="total">
+        </el-pagination>
     </div>
 </template>
 <script>
@@ -34,6 +40,10 @@ import { paper_list, paper_delete } from "../modules/api.js";
 export default {
     data() {
         return {
+            search: {
+                pageNo: 1,
+                pageSize: 10
+            },
             list: [],
             total: 0,
             loading: false,
@@ -43,7 +53,7 @@ export default {
     },
     methods: {
         getList() {
-            paper_list().then(data => {
+            paper_list(this.search).then(data => {
                 if (data.code == "0") {
                     this.list = data.result.list;
                     this.total = data.result.page.total;
@@ -51,7 +61,7 @@ export default {
             });
         },
         handleDelete(id) {
-            this.$confirm("此操作将永久删除该考试，是否继续？", "提示", {
+            this.$confirm("此操作将永久删除该试卷，是否继续？", "提示", {
                 "confirmButtonText": "确认",
                 "cancelButtonText": "取消",
                 "type": "warning",
@@ -68,7 +78,10 @@ export default {
             }).catch(() => {
                 this.$message({ type: "info", message: "已取消删除!" });
             });
-
+        },
+        handlePageChange(pageNo){
+            this.search.pageNo = pageNo;
+            this.getList();
         }
     },
     mounted() {
@@ -77,4 +90,7 @@ export default {
 }
 </script>
 <style scoped>
+.page{
+    margin-top: 5px;
+}
 </style>
