@@ -49,6 +49,8 @@ export const category_edit = (data={})=>{
 export const paper_list = (data={})=>{
 	return axios.post("/paper/list", data);
 };
+
+
 /*---------删除试卷接口-------------*/
 export const paper_delete = (id="")=>{
 	return axios.post("/paper/delete", {id});
@@ -62,8 +64,8 @@ export const paper_edit = (data={})=>{
 	return axios.post("/paper/edit", data);
 };
 /*---------获取试卷详情----------------*/
-export const paper_detail = (data={})=>{
-	return axios.post("/paper/detail", data);
+export const paper_detail = (id={})=>{
+	return axios.post("/paper/detail", {id});
 };
 
 /*---------获取题目列表--------------*/

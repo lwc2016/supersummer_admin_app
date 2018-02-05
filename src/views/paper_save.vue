@@ -24,7 +24,7 @@
 	</el-form>
 </template>
 <script>
-	import { paper_add, paper_detail } from "../modules/api.js";
+	import { paper_add, paper_detail, paper_edit } from "../modules/api.js";
 	import router from "../modules/router.js";
 	export default{
 		data(){
@@ -45,7 +45,7 @@
 				this.$refs[formName].validate(valid=>{
 					if(valid){
 						if(this.id){
-							
+							this.editPaper();
 						}else{
 							this.addPaper();
 						};
@@ -65,10 +65,21 @@
 					}
 				});
 			},
+			editPaper(){
+				let form = Object.assign(this.form, {id: this.id});
+				paper_edit(form).then(data=>{
+					if(data.code == 0){
+						router.push({path: "/backoffice/paper/list"});
+					};	
+				});
+			},
 			getDetail(){
-				// paper_detail(this.id).then(data=>{
-				// 	console.log(data);
-				// });
+				paper_detail(this.id).then(data=>{
+					if(data.code == "0"){
+						this.form.name = data.result.name;
+						this.form.subject = data.result.subject;
+					};
+				});
 			}
 		},
 		mounted(){
