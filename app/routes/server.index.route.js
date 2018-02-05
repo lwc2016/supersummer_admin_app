@@ -13,7 +13,8 @@ const paths = [
     "/backoffice/category/edit/:id",
     "/backoffice/paper/list",
     "/backoffice/paper/add",
-    "/backoffice/paper/edit/:id"
+    "/backoffice/paper/edit/:id",
+    "/backoffice/question/:subject"
 ];
 router.get(paths, (req, res, next) => {
     res.sendFile(path.join(__dirname, "../views/index.html"));

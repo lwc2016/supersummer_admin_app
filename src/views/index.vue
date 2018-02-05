@@ -63,6 +63,7 @@
 	align-items: center;
 }
 .form-area {
+    margin-top: -100px;
     width: 340px;
     background-color: #F2F6FC;
     border-radius: 6px;

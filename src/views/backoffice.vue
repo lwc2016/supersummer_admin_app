@@ -24,11 +24,23 @@
 					<el-menu-item index="2-5" route="/backoffice/category/shenji">审计分类</el-menu-item>
 					<el-menu-item index="2-6" route="/backoffice/category/fengkong">风险控制分类</el-menu-item>
 				</el-submenu>
-				<el-menu-item index="3" route="/backoffice/paper/list">
+				<el-submenu index="3">
+					<template slot="title">
+						<i class="el-icon-menu"></i>
+						<span>题目管理</span>
+					</template>
+					<el-menu-item index="3-1" route="/backoffice/question/kuaiji">会计</el-menu-item>
+					<el-menu-item index="3-2" route="/backoffice/question/shuifa">税法</el-menu-item>
+					<el-menu-item index="3-3" route="/backoffice/question/caiwu">财务管理</el-menu-item>
+					<el-menu-item index="3-4" route="/backoffice/question/jingji">经济法</el-menu-item>
+					<el-menu-item index="3-5" route="/backoffice/question/shenji">审计</el-menu-item>
+					<el-menu-item index="3-6" route="/backoffice/question/fengkong">风险控制</el-menu-item>
+				</el-submenu>
+				<el-menu-item index="4" route="/backoffice/paper/list">
 					<i class="el-icon-menu"></i>
 					<span slot="title">试卷管理</span>
 				</el-menu-item>
-				<el-menu-item index="4" route="/backoffice/answer/list">
+				<el-menu-item index="5" route="/backoffice/answer/list">
 					<i class="el-icon-menu"></i>
 					 <span slot="title">答题管理</span>
 				</el-menu-item>
