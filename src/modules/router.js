@@ -7,6 +7,7 @@ import PaperList from "../views/paper_list.vue";
 import PaperSave from "../views/paper_save.vue";
 import AnswerList from "../views/answer_list.vue";
 import QuestionList from "../views/question_list.vue";
+import QuestionSave from "../views/question_save.vue";
 
 const routes = [
     { path: "/", component: Index },
@@ -19,7 +20,9 @@ const routes = [
         {path: "/backoffice/paper/add", component: PaperSave},
         {path: "/backoffice/paper/edit/:id", component: PaperSave, props: true},
         {path: "/backoffice/answer/list", component: AnswerList},
-        {path: "/backoffice/question/:subject", component: QuestionList, props: true}
+        {path: "/backoffice/question/add", component: QuestionSave},
+        {path: "/backoffice/question/:subject", component: QuestionList, props: true},
+        {path: "/backoffice/question/edit/:id", component: QuestionSave, props: true}
       ]
     }
 ];

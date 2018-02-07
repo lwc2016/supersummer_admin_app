@@ -1,6 +1,13 @@
 <template>
     <div>
-        <el-table v-bind:data="list" size="mini">
+        <el-form size="small" v-bind:inline="true">
+            <el-form-item>
+                <router-link to="/backoffice/question/add">
+                    <el-button size="small" type="primary">新增题目</el-button>
+                </router-link>
+            </el-form-item>
+        </el-form>
+        <el-table v-bind:data="list" size="mini" border>
             <el-table-column prop="id" label="题目编号"></el-table-column>
             <el-table-column prop="subject" label="科目">
             	<template slot-scope="scope">{{formatSubject(scope.row.subject)}}</template>
@@ -14,7 +21,9 @@
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="primary">编辑</el-button>
+                    <router-link v-bind:to="'/backoffice/question/edit/' + scope.row.id">
+                        <el-button size="mini" type="primary">编辑</el-button>
+                    </router-link>
                     <el-button v-on:click="handleDelete(scope.row.id)" size="mini" type="danger">删除</el-button>
                 </template>
             </el-table-column>
@@ -84,6 +93,17 @@ export default {
     },
     mounted() {
         this.getList()
+    },
+    watch:{
+        $route(to, from){
+            console.log(to);
+            this.search = {
+                pageNo: 1,
+                pageSize: 10,
+                subject: to.params.subject
+            };
+            this.getList();
+        }
     }
 }
 </script>

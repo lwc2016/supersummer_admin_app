@@ -14,7 +14,9 @@ const paths = [
     "/backoffice/paper/list",
     "/backoffice/paper/add",
     "/backoffice/paper/edit/:id",
-    "/backoffice/question/:subject"
+    "/backoffice/question/:subject",
+    "/backoffice/question/add",
+    "/backoffice/question/edit/:id"
 ];
 router.get(paths, (req, res, next) => {
     res.sendFile(path.join(__dirname, "../views/index.html"));
@@ -30,6 +32,7 @@ router.post("/do", authMiddleware, (req, res, next) => {
         token: req.cookies.token || "",
         uid: req.cookies.uid || ""
     };
+    console.log(form);
     request.post(url, { headers: headers, form: form }, (err, httpResponse, body) => {
         try {
             let data = JSON.parse(body);

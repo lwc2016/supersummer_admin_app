@@ -40,10 +40,6 @@
 					<i class="el-icon-menu"></i>
 					<span slot="title">试卷管理</span>
 				</el-menu-item>
-				<el-menu-item index="5" route="/backoffice/answer/list">
-					<i class="el-icon-menu"></i>
-					 <span slot="title">答题管理</span>
-				</el-menu-item>
 			</el-menu>
 		</el-aside>
 		<el-container>

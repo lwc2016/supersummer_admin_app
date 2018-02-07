@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<el-form v-bind:inline="true">
-			<el-form-item class="form-item">
+		<el-form size="small" v-bind:inline="true">
+			<el-form-item>
 				<router-link to="/backoffice/category/add">
 					<el-button size="small" type="primary">新增分类</el-button>
 				</router-link>
@@ -135,8 +135,5 @@
 }
 .table{
 	margin-top: 5px;
-}
-.form-item{
-	margin-bottom: 0!important;
 }
 </style>
