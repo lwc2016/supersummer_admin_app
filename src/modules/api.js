@@ -97,5 +97,8 @@ export const question_edit = (data={})=>{
 	return axios.post("/question/edit", data);
 };
 
-
+/*---------获取章节列表------------*/
+export const chapter_list = (data={})=>{
+	return axios.post("/chapter/list", data)
+};
 

@@ -3,7 +3,7 @@
         <el-form size="small" v-bind:inline="true">
             <el-form-item>
                 <router-link to="/backoffice/paper/add">
-                    <el-button size="small" type="primary">新增考试</el-button>
+                    <el-button size="small" type="primary">新增试卷</el-button>
                 </router-link>
             </el-form-item>
         </el-form>

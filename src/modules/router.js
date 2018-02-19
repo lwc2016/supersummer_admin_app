@@ -13,16 +13,16 @@ const routes = [
     { path: "/", component: Index },
     { path: "/backoffice", component: Backoffice,
       children:[
-      	{path: "/backoffice/category/add", component: CategorySave},
-      	{path: "/backoffice/category/edit/:id", component: CategorySave, props: true},
-      	{path: "/backoffice/category/:subject", component: CategoryList, props: true},
-        {path: "/backoffice/paper/list", component: PaperList},
-        {path: "/backoffice/paper/add", component: PaperSave},
-        {path: "/backoffice/paper/edit/:id", component: PaperSave, props: true},
-        {path: "/backoffice/answer/list", component: AnswerList},
-        {path: "/backoffice/question/add", component: QuestionSave},
-        {path: "/backoffice/question/:subject", component: QuestionList, props: true},
-        {path: "/backoffice/question/edit/:id", component: QuestionSave, props: true}
+      	  {path: "/backoffice/category/add", component: CategorySave},
+      	  {path: "/backoffice/category/edit/:id", component: CategorySave, props: true},
+          {path: "/backoffice/category/:subject", component: CategoryList, props: true},
+          {path: "/backoffice/paper/list", component: PaperList},
+          {path: "/backoffice/paper/add", component: PaperSave},
+          {path: "/backoffice/paper/edit/:id", component: PaperSave, props: true},
+          {path: "/backoffice/answer/list", component: AnswerList},
+          {path: "/backoffice/question/add", component: QuestionSave},
+          {path: "/backoffice/question/:subject", component: QuestionList, props: true},
+          {path: "/backoffice/question/edit/:id", component: QuestionSave, props: true}
       ]
     }
 ];

@@ -21,21 +21,29 @@
 			></el-table-column>
 			<el-table-column
 			label="所属科目"
+			width="120px"
 			>
 				<template slot-scope="scope">{{formatSubject(scope.row.subject)}}</template>
 			</el-table-column>
+			<!--<el-table-column-->
+			<!--label="创建时间"-->
+			<!--&gt;-->
+				<!--<template slot-scope="scope">{{formatDateTime(scope.row.created_time, "YYYY-MM-DD h:m:s")}}</template>-->
+			<!--</el-table-column>-->
 			<el-table-column
-			prop="question_count"
-			label="题目数量"
+					prop="chapter"
+					label="章节"
 			>
 			</el-table-column>
 			<el-table-column
-			label="创建时间"
+					prop="question_count"
+					label="题目数量"
+					width="120px"
 			>
-				<template slot-scope="scope">{{formatDateTime(scope.row.created_time, "YYYY-MM-DD h:m:s")}}</template>
 			</el-table-column>
 			<el-table-column
 			label="操作"
+			width="160px"
 			>
 				<template slot-scope="scope">
 					<router-link v-bind:to="'/backoffice/category/edit/' + scope.row.id">

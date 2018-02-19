@@ -1,6 +1,13 @@
 <template>
     <div>
         <el-form v-bind:model="form" v-bind:rules="rules" status-icon ref="form" label-width="180px">
+            <el-form-item label="题目编号：" prop="no">
+                <el-row>
+                    <el-col v-bind:span="21">
+                        <el-input type="text" v-model="form.no"></el-input>
+                    </el-col>
+                </el-row>
+            </el-form-item>
             <el-form-item label="题目内容：" prop="content">
                 <el-row>
                     <el-col v-bind:span="21">
@@ -48,6 +55,13 @@
                 </el-checkbox-group>
                 <p class="notice" v-show="form.options.length == 0">请先添加题目选项</p>
             </el-form-item>
+            <el-form-item label="答案解析：" prop="answer_analyze">
+                <el-row>
+                    <el-col v-bind:span="21">
+                        <el-input type="textarea" v-model="form.answer_analyze" v-bind:rows="6"></el-input>
+                    </el-col>
+                </el-row>
+            </el-form-item>
             <el-form-item>
                 <el-button v-on:click="handleSubmit('form')" size="small" type="primary">提交</el-button>
                 <el-button size="small" type="danger">清除</el-button>
@@ -82,12 +96,15 @@ export default {
     data() {
         return {
             form: {
+                no: "",
                 content: "",
                 category_id: "",
                 right_answer: [],
-                options: []
+                options: [],
+                answer_analyze: ""
             },
             rules: {
+                no:[{required: true, message: "请填写题目编号"}],
                 content: [{ required: true, message: "请填写题目内容！" }],
                 category_id: [{ required: true, message: "请选择知识分类！" }],
                 right_answer: [{ required: true, message: "请选择正确答案！" }]
@@ -111,11 +128,12 @@ export default {
             this.$refs[formName].validate(valid => {
                 if(valid){
                     let form = {};
+                    form.no = this.form.no;
                     form.content = this.form.content;
                     form.category_id = this.form.category_id;
                     form.right_answer = this.form.right_answer.join(",");
                     form.options = JSON.stringify(this.form.options);
-                    
+                    form.answer_analyze = this.form.answer_analyze;
                     this.id ? this.eidtQuestion(form) : this.addQuestion(form);
                 };
             });
@@ -161,6 +179,7 @@ export default {
                     this.form.category_id = data.result.category_id;
                     this.form.options = data.result.options;
                     this.form.right_answer = data.result.right_answer.split(",");
+                    this.form.answer_analyze = data.result.answer_analyze;
                 }
             });
         },
